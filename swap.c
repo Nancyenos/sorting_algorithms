@@ -6,7 +6,3 @@ void swap(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
-int main()
-{
-	return 0;
-}
