@@ -1,96 +1,50 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "sort.h"
 
-typedef struct listint_s {
-    int n;
-    struct listint_s *prev;
-    struct listint_s *next;
-} listint_t;
+/**
+ * insertion_sort_list - Sorts a doubly linked list of integers in ascending
+ *                        order using the Insertion sort algorithm
+ *
+ * @list: Double pointer to the first element of the doubly linked list
+ */
+void insertion_sort_list(listint_t **list)
+{
+	listint_t *curr;
 
-void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2) {
-    if (node1->prev)
-        node1->prev->next = node2;
-    if (node2->prev)
-        node2->prev->next = node1;
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
 
-    listint_t *temp_prev = node1->prev;
-    node1->prev = node2->prev;
-    node2->prev = temp_prev;
+	curr = (*list)->next;
 
-    listint_t *temp_next = node1->next;
-    node1->next = node2->next;
-    node2->next = temp_next;
+	while (curr)
+	{
+		listint_t *key = curr;
+		listint_t *prev = curr->prev;
 
-    if (!node1->prev)
-        *list = node1;
-    if (!node2->prev)
-        *list = node2;
-}
+		while (prev && prev->n > key->n)
+		{
+			/* Perform the swap of nodes */
+			listint_t *tmp_prev = prev->prev;
+			listint_t *tmp_next = key->next;
 
-void insertion_sort_list(listint_t **list) {
-    if (list == NULL || *list == NULL || (*list)->next == NULL)
-        return;
+			if (tmp_prev)
+				tmp_prev->next = key;
+			else
+				*list = key;
 
-    listint_t *curr = (*list)->next;
+			if (tmp_next)
+				tmp_next->prev = prev;
 
-    while (curr) {
-        listint_t *insertion_point = curr->prev;
+			key->prev = tmp_prev;
+			key->next = prev;
+			prev->prev = key;
+			prev->next = tmp_next;
 
-        while (insertion_point && insertion_point->n > curr->n) {
-            swap_nodes(list, insertion_point, curr);
-            insertion_point = curr->prev;
+			print_list(*list);
 
-            /*** Print the list after each swap ***/
-            listint_t *temp = *list;
-            while (temp) {
-                printf("%d", temp->n);
-                if (temp->next)
-                    printf(", ");
-                else
-                    printf("\n");
-                temp = temp->next;
-            }
-        }
+			prev = key->prev;
+		}
 
-        curr = curr->next;
-    }
-}
-
-/*** Helper function to create a new node***/
-listint_t *create_node(int n) {
-    listint_t *new_node = malloc(sizeof(listint_t));
-    if (new_node) {
-        new_node->n = n;
-        new_node->prev = NULL;
-        new_node->next = NULL;
-    }
-    return new_node;
-}
-
-/*** Helper function to add a node to the end of the linked list ***/
-void add_node(listint_t **list, listint_t *new_node) {
-    if (list == NULL || new_node == NULL)
-        return;
-
-    if (*list == NULL) {
-        *list = new_node;
-    } else {
-        listint_t *temp = *list;
-        while (temp->next)
-            temp = temp->next;
-        temp->next = new_node;
-        new_node->prev = temp;
-    }
-}
-
-/*** Helper function to print the linked list ***/
-void print_list(listint_t *list) {
-    while (list) {
-        printf("%d", list->n);
-        if (list->next)
-            printf(", ");
-        else
-            printf("\n");
-        list = list->next;
-    }
+		curr = curr->next;
+	}
 }
