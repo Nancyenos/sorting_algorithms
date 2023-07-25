@@ -1,7 +1,6 @@
 #ifndef SORT_H
 #define SORT_H
-<<<<<<< HEAD
-=======
+
 
 /**
  * struct listint_s - Doubly linked list node
@@ -16,7 +15,7 @@ typedef struct listint_s
 	struct listint_s *prev;
 	struct listint_s *next;
 } listint_t;
->>>>>>> 5ebbcd895c9403fdc3f60281967129c14d168312
+
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
 void swap(int *a, int *b);
