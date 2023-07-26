@@ -17,7 +17,7 @@ void swap_ints(int *a, int *b)
 }
 
 /**
- * lomuto_partition - Order a subset of an array of integers according to
+ * domuto_partition - Order a subset of an array of integers according to
  *                    the lomuto.
  * @array: array of integers.
  * @size:  size of the array.
@@ -26,7 +26,7 @@ void swap_ints(int *a, int *b)
  *
  * Return: The final partition index.
  */
-int lomuto_partition(int *array, size_t size, int left, int right)
+int domuto_partition(int *array, size_t size, int left, int right)
 {
 	int *driver, up, down;
 

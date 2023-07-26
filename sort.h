@@ -28,13 +28,9 @@ void swap(int *a, int *b);
 void bubble_sort(int *array, size_t size);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-<<<<<<< HEAD
-void quicksort_recursive(int *array, int low, int high);
 int lomuto_partition(int *array, int low, int high);
-void shell_sort(int *array, size_t size)
-=======
+void shell_sort(int *array, size_t size);
 void quicksort_recursive(int *array, int low, int high, int size);
-int lomuto_partition(int *array, size_t size, int left, int right);
 void lomuto_sort(int *array, size_t size, int left, int right);
->>>>>>> b93e36a4cc03151e0a372d981a38df043ed9b66f
+int domuto_partition(int *array, size_t size, int left, int right);
 #endif
